@@ -1,0 +1,1587 @@
+//MAIN CLASS
+
+public class MangInasal   {
+    public static void main(String[] args) {
+        Ordering order = new Ordering();   
+        order.FoodDisplay();
+        order.SelectOrder();
+        order.choiceOption(); 
+    }
+}
+
+
+//Second Class
+import java.util.*;
+public class Ordering {
+
+ Scanner sc = new Scanner(System.in); 
+
+ public void FoodDisplay(){ // FOOD MENU SECTION
+    prt("\n----------------------------------------");
+    prt("\n         WELCOME TO MANG-INASAL!\n");
+    prt("----------------------------------------");
+    prt("****************************************");
+    prt("**      Please select the category    **");
+    prt("**        [1] REGULAR                 **");
+    prt("**        [2] SOLO FIESTA             **");
+    prt("**        [3] PORK BBQ                **");
+    prt("**        [4] HALO-HALO               **");
+    prt("**        [5] SISIG                   **");    // FOOD MENU DISPLAY
+    prt("**        [6] LIEMPO                  **");
+    prt("**        [7] GROUP MEALS             **");
+    prt("**        [8] FIESTA GROUP MEALs      **");
+    prt("**        [9] PALABOK                 **");
+    prt("**        [10] LUMPIANG TOGUE         **");
+    prt("**        [11] DRINKS                 **");
+    prt("****************************************");
+    }
+   
+   //Declaration variables for Regular category
+   float reg1 = 129.00f;
+   float reg2 = 164.00f;
+   float reg3 = 154.00f;
+   float reg4 = 189.00f;
+   float reg5 = 99.00f;
+   
+   //Declaration variables for Solo Fiesta category
+   float sf1 = 189.00f;
+   float sf2 = 219.00f;
+   float sf3 = 244.00f;
+   float sf4 = 250.00f;
+   float sf5 = 275.00f;
+   
+   //Declaration variables for Pork BBQ category
+   float pbbq1 = 99.00f;
+   float pbbq2 = 129.00f;
+   
+   //Declaration variables for HALO-HALO category
+   float halo1 = 39.00f;
+   float halo2 = 70.00f;
+   float halo3 = 90.00f;
+   float halo4 = 39.00f;
+   float halo5 = 70.00f;
+   float halo6 = 90.00f;
+   
+   //Declaration variables for SISIG category
+   float sisig1 = 99.00f;
+   float sisig2 = 129.00f;
+   
+   //Declaration variables for LIEMPO category
+   float liempo1 = 129.00f;
+   float liempo2 = 154.00f;
+   
+   //Declaration variables for GROUP MEALS category
+   float grpm1 = 490.00f;
+   float grpm2 = 246.00f;
+   float grpm3 = 570.00f;
+   float grpm4 = 296.00f;
+   float grpm5 = 475.00f;
+   float grpm6 = 193.00f;
+   float grpm7 = 305.00f;
+   float grpm8 = 297.00f;
+   float grpm9 = 332.00f;
+   float grpm10 = 503.00f;
+   
+   //Declaration variables for FIESTA GROUP MEALS category
+   float FGM1 = 749.00f;
+   float FGM2 = 829.00f;
+   float FGM3 = 819.00f;
+   float FGM4 = 859.00f;
+   float FGM5 = 399.00f;
+   float FGM6 = 429.00f;
+   float FGM7 = 419.00f;
+   float FGM8 = 439.00f;
+   
+   //Declaration variables for PALABOK category
+   float palabok1 = 79.00f;
+   float palabok2 = 599.00f;
+   
+   //Declaration variables for LUMPIANG TOGUE category
+   float LumTo1 = 29.00f;
+   float LumTo2 = 55.00f;
+   float LumTo3 = 165.00f;
+   
+   //Declaration variables for DRINKS
+   float drinks1 = 45.00f;
+   float drinks2 = 55.00f;
+   float drinks3 = 30.00f;
+   float drinks4 = 50.00f;
+   float drinks5 = 60.00f;
+   
+   //Declaration variables for the totalizalitaion 
+   float total = 0;
+   float totalP = 0;
+   int totalItems = 0;
+   
+   //Declaration variables for VAT and Discount
+   float VAT = 0.12f;
+   float discountPWD = 0.15f;
+   float discountSenior = 0.20f;
+   float calculateVAT;
+   float calculateVAT2;
+   float totalplusVAT;
+   
+   //ARRAY LIST FOR LISTING ORDER NAMES, PRICE, QUANTITY, ITEMS, TOTAL
+   List<String> orderNames = new ArrayList<>();
+   List<Float> orderPrice = new ArrayList<>();
+   List<Integer> orderQuantity = new ArrayList<>();
+   List<Float> totalPrice = new ArrayList<>();
+   List<Integer> foodItems = new ArrayList<>();
+   
+   public void SelectOrder(){ // AFTER THE FOOD MENU SECTION, IT WILL DIRECT IN THIS SECTION: SELECTING ORDER SECTION
+
+    int pick = 0;  //    Declaration variablee for 'pick' it is set to 0 for empty or no value
+    while(pick<1||pick>11){ //         =====>              LOOPING FOR PICKING CHOICE
+       
+    try {//               =====>                 Try Catch for 'INPUT MISMATCH' EXCEPTION
+    prt("\nPICK YOUR CHOICE : ");
+    pick = sc.nextInt();
+    }catch(Exception e){
+       prt("\nINVALID INPUT!, TRY AGAIN.");
+       sc.nextLine();   
+    }
+    
+    if(pick==1){ //                                              REGULAR CATEGORY
+    int regular = 0;  // Declaration varaible for 'regular' it is set to 0 for empty or no value
+       while(regular<1||regular>5){ //   =====>            TO LOOP FOR INCORRECT INPUT. ALSO, THE USER MUST CHOOSE ONLY BETWEEN 1-5
+   
+           try{ //            ======>               TO CATCH EXCEPTION: INPUT MISMATCH EXCEPTION.        
+       prt("\n* REGULAR *");
+       prt("> [1] Chicken inasal paa large 1 rice solo = 129php");
+       prt("> [2] Chicken inasal paa large unli-rice solo = 164php");
+       prt("> [3] Chicken Inasal Pecho Large 1 Rice Solo = 154php");
+       prt("> [4] Chicken Inasal Pecho Unli-Rice Solo = 189php");
+       prt("> [5] Chicken Inasal Regular = 99php");
+   
+       prt("CHOOSE YOUR ORDER : ");
+       regular =sc.nextInt();
+       }catch(Exception e){ // =====> Once the exception is catch the print message will display and will repeat for the user choose order again with the help of 'while loop'
+           prt("\nINVALID INPUT! TRY AGAIN.");
+           sc.nextLine();
+       }
+       
+       if(regular==1){
+           while(true){ //     =====>      LOOPING FOR TRY CATCH ERROR: INPUT MISMATCH EXCEPTION
+           try{ 
+           prt("\n* You choose chicken inasal paa large 1 rice solo for 129Php");
+           prt("ENTER QUANTITY : ");
+           int quantity=sc.nextInt();
+           sc.nextLine(); //  ======>           Extra nextline to prevent skipping scanner line.
+           total+= quantity*reg1; /*   =====>   The variable 'total' is used to multiply the quantity and the ALL orders.
+                                                "+=" sign is used to sum all of the orders from different categories, without the plus and equal together -
+                                                the order/s would overwrite each other if "=" is only used. it is called "compound assignment operator" btw*/             
+           totalP = quantity*reg1; //  ====>    This 'total' variable is used to total the quantity the specific or individual order only.
+           orderNames.add("chicken inasal paa large 1 rice solo");  // ====>  this will store in the arraylist 'ordernames'
+           orderPrice.add(reg1);        //  ====>     this will store in the arraylist 'orderprice'
+           orderQuantity.add(quantity); //  ====>     this will store in the arraylist 'orderquantity'
+           totalPrice.add(totalP);      //  ====>     this will store in the arraylist 'totalprice'
+           break;  //        ======>        THIS BREAK PURPOSE IS TO PREVENT UNNECESSESARY LOOPING.
+           }catch (Exception e){
+               prt("\nINVALID INPUT! TRY AGAIN.");
+               sc.nextLine();
+           }
+       }
+   
+       }else if(regular==2){
+           while(true){
+           try{
+           prt("\n*You choose chicken inasal paa large unli-rice solo for 164Php");
+           prt("ENTER QUANTITY : ");
+           int quantity=sc.nextInt();
+           sc.nextLine();
+           total+=quantity*reg2;
+           totalP = quantity*reg2;
+           orderNames.add("chicken inasal paa large unli-rice solo");
+           orderPrice.add(reg2);
+           orderQuantity.add(quantity);
+           totalPrice.add(totalP);
+           break;
+           }catch(Exception e){
+               prt("\nINVALID INPUT TRY AGAIN.");
+               sc.nextLine();
+           }
+           }
+   
+       }else if(regular==3){
+           while(true){
+               try{
+           prt("\n*You choose Chicken Inasal Pecho Large 1 Rice Solo for 154Php");
+           prt("ENTER QUANTITY : ");
+           int quantity=sc.nextInt();
+           sc.nextLine();
+           total+=quantity*reg3;
+           totalP = quantity*reg3;
+           orderNames.add("Chicken Inasal Pecho Large 1 Rice Solo");
+           orderPrice.add(reg3);
+           orderQuantity.add(quantity);
+           totalPrice.add(totalP);
+           break;
+       }catch(Exception e){
+           prt("\nINVALID INPUT! TRY AGAIN.");
+           sc.nextLine();
+       }
+       }
+   
+       }else if(regular==4){
+           while(true){
+               try{
+           prt("\n*You choose Chicken Inasal Pecho Unli-Rice Solo for 189php");
+           prt("ENTER QUANTITY : ");
+           int quantity=sc.nextInt();
+           sc.nextLine();
+           total+=quantity*reg4;
+           totalP = quantity*reg4;
+           orderNames.add("Chicken Inasal Pecho Unli-Rice Solo");
+           orderPrice.add(reg4);
+           orderQuantity.add(quantity);
+           totalPrice.add(totalP);
+           break;
+       }catch(Exception e){
+           prt("\nINVALID INPUT! TRY AGAIN.");
+           sc.nextLine();
+       }
+       }
+   
+       }else if(regular==5){
+           while(true){
+               try{
+           prt("\n*You choose Chicken Inasal Regular for 99php");
+           prt("ENTER QUANTITY : ");
+           int quantity=sc.nextInt();
+           sc.nextLine();
+           total+=quantity*reg5;
+           totalP = quantity*reg5;
+           orderNames.add("Chicken Inasal Regular");
+           orderPrice.add(reg5);
+           orderQuantity.add(quantity);
+           totalPrice.add(totalP);
+           break;
+       }catch(Exception e){
+           prt("\nINVALID INPUT! TRY AGAIN.");
+           sc.nextLine();
+       }
+       }
+   
+       }
+       }
+
+    }else if(pick==2){ //                          SOLO FIESTA
+        int SoloF=0;                       
+        while(SoloF<1||SoloF>5){ 
+        try{
+        prt("\n* SOLO-FIESTA *");
+        prt("> [1] Solo Fiesta 2pc pork BBQ 1r solo = 189php");
+        prt("> [2] Solo Fiesta Paa 1r solo = 219php");
+        prt("> [3] Solo Fiesta Pecho 1R Solo = 244php");
+        prt("> [4] Solo Fiesta Paa & 1pc Pork BBQ 1R Solo = 250php");
+        prt("> [5] Solo Fiesta Pecho & 1pc Pork BBQ 1R Solo = 275php");
+        prt("CHOOSE YOUR ORDER: ");
+        SoloF=sc.nextInt();
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+
+        if(SoloF==1){
+            while(true){
+                try{
+            prt("\n*You choose Solo Fiesta 2pc pork BBQ 1r solo for "+sf1+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*sf1;
+            totalP=quantity*sf1;
+            orderNames.add("Solo Fiesta 2pc pork BBQ 1r solo");
+            orderPrice.add(sf1);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+
+        }else if(SoloF==2){
+            while(true){
+                try{
+            prt("\n*You choose Solo Fiesta paa 1r solo for "+sf2+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*sf2;
+            totalP = quantity*sf2;
+            orderNames.add("Solo Fiesta paa 1r solo");
+            orderPrice.add(sf2);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+
+        }else if(SoloF==3){
+            while(true){
+                try{
+            prt("\n*You choose Solo Fiesta Pecho 1R Solo for "+sf3+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*sf3;
+            totalP = quantity*sf3;
+            orderNames.add("Solo Fiesta Pecho 1R Solo");
+            orderPrice.add(sf3);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+
+        }else if(SoloF==4){
+            while(true){
+                try{
+            prt("\n*You choose Solo Fiesta Paa & 1pc Pork BBQ 1R Solo for "+sf4+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*sf4;
+            totalP = quantity*sf4;
+            orderNames.add("Solo Fiesta Paa & 1pc Pork BBQ 1R Solo");
+            orderPrice.add(sf4);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+
+        }else if(SoloF==5){
+            while(true){
+                try{
+            prt("\n*You choose Solo Fiesta Pecho & 1pc Pork BBQ 1R Solo for "+sf5+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*sf5;
+            totalP = quantity*sf5;
+            orderNames.add("Solo Fiesta Pecho & 1pc Pork BBQ 1R Solo");
+            orderPrice.add(sf5);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+
+        }    
+    }
+
+        }else if(pick==3){  //                    PORK BBQ
+        int PBBQ=0;                       
+        while(PBBQ<1||PBBQ>2){ 
+        try{                        
+            prt("\n* PORK BBQ *");
+            prt("> [1] 2pc Pork BBQ with Plain Rice and Spiced Vinegar = 99php");
+            prt("> [2] 2pc Pork BBQ with Java Rice and Peanut Sauce = 129php");
+            prt("ENTER YOUR ORDER: ");
+            PBBQ=sc.nextInt();
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+
+            if(PBBQ==1){
+                while(true){
+                    try{
+                prt("\n*You choose 2pc Pork BBQ with Plain Rice and Spiced Vinegar for "+pbbq1+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*pbbq1;
+                totalP = quantity*pbbq1;
+                orderNames.add("2pc Pork BBQ with Plain Rice and Spiced Vinegar");
+                orderPrice.add(pbbq1);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+
+            }else if(PBBQ==2){
+                while(true){
+                    try{
+                prt("\n*You choose 2pc Pork BBQ with Java Rice and Peanut Sauce for "+pbbq2+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*pbbq2;
+                totalP = quantity*pbbq2;
+                orderNames.add("2pc Pork BBQ with Java Rice and Peanut Sauce");
+                orderPrice.add(pbbq2);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+
+            }
+        }
+
+        }else if(pick==4){                     // HALO-HALO
+            int Halo=0;
+            while(Halo<1||Halo>6){ 
+                try{    
+            prt("\n* HALO-HALO *");
+            prt("> [1] Extra Creamy Halo-Halo 8oz Add-on = 39php");
+            prt("> [2] Extra Creamy Halo-Halo Small = 70php");
+            prt("> [3] Extra Creamy Halo-Halo Regular = 90php");
+            prt("> [4] Crema de Leche Halo-Halo 8oz Add-on = 39php");
+            prt("> [5] Crema de Leche Halo-Halo Small = 70php");
+            prt("> [6] Crema de Leche Halo-Halo Regular = 90php");
+            prt("ENTER YOUR ORDER: ");
+            Halo=sc.nextInt();
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+            if(Halo==1){
+                while(true){
+                    try{
+                prt("\n*You choose Extra Creamy Halo-Halo 8oz Add-on for "+halo1+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*halo1;
+                totalP = quantity*halo1;
+                orderNames.add("Extra Creamy Halo-Halo 8oz Add-on");
+                orderPrice.add(halo1);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+
+            }else if(Halo==2){
+                while(true){
+                    try{
+                prt("\n*You choose Extra Creamy Halo-Halo Small for "+halo2+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*halo2;
+                totalP = quantity*halo2;
+                orderNames.add("Extra Creamy Halo-Halo Small");
+                orderPrice.add(halo2);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+
+            }else if(Halo==3){
+                while(true){
+                    try{
+                prt("\n*You choose Extra Creamy Halo-Halo Regular for "+halo3+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*halo3;
+                totalP = quantity*halo3;
+                orderNames.add("Extra Creamy Halo-Halo Regular");
+                orderPrice.add(halo3);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+
+            }else if(Halo==4){
+                while(true){
+                    try{
+                prt("\n*You choose Crema de Leche Halo-Halo 8oz Add-on for "+halo4+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*halo4;
+                totalP = quantity*halo4;
+                orderNames.add("Crema de Leche Halo-Halo 8oz Add-on");
+                orderPrice.add(halo4);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+
+            }else if(Halo==5){
+                while(true){
+                    try{
+                prt("\n*You choose Crema de Leche Halo-Halo Small for "+halo5+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*halo5;
+                totalP = quantity*halo5;
+                orderNames.add("Crema de Leche Halo-Halo Small");
+                orderPrice.add(halo5);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+
+            }else if(Halo==6){
+                while(true){
+                    try{
+                prt("\n*You choose Crema de Leche Halo-Halo Regular for "+halo6+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*halo6;
+                totalP = quantity*halo6;
+                orderNames.add("Crema de Leche Halo-Halo Regular");
+                orderPrice.add(halo5);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+            }
+            }
+            }
+
+        }else if(pick==5){                           // SISIG
+        int sisig=0;
+        while(sisig<1||sisig>2){
+            try{
+         prt("\n* SISIG *");
+         prt("> [1] Pork Sisig 1 Rice Solo = 99php");
+         prt("> [2] Bangus Sisig 1 Rice Solo = 129php");
+         prt("ENTER YOUR ORDER: ");
+         sisig=sc.nextInt();
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+
+         if(sisig==1){
+            while(true){
+                try{
+            prt("\n*You choose Pork Sisig 1 Rice Solo for "+sisig1+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*sisig1;
+            totalP = quantity*sisig1;
+            orderNames.add("Pork Sisig 1 Rice Solo");
+            orderPrice.add(sisig1);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+
+         }else if(sisig==2){
+            while(true){
+                try{
+            prt("\n*You choose Bangus Sisig 1 Rice Solo for "+sisig2+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*sisig2;
+            totalP = quantity*sisig2;
+            orderNames.add("Bangus Sisig 1 Rice Solo");
+            orderPrice.add(sisig2);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+        }
+        }
+
+        }else if (pick==6){ //                                    LIEMPO
+        int liempo=0;
+        while(liempo<1||liempo>2){
+            try{
+         prt("\n* LIEMPO *");
+         prt("> [1] Grilled Liempo 1 Rice Solo = 129php");
+         prt("> [2] Sizzling Liempo 1 Rice Solo = 154php");
+         prt("ENTER YOUR ODER: ");
+         liempo=sc.nextInt();
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            
+         if(liempo==1){
+            while(true){
+            try{
+            prt("\n*You choose Grilled Liempo 1 Rice Solo for "+liempo1+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*liempo1;
+            totalP = quantity*liempo1;
+            orderNames.add("Grilled Liempo 1 Rice Solo");
+            orderPrice.add(liempo1);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+         }else if(liempo==2){
+            while(true){
+                try{
+            prt("\n*You choose Sizzling Liempo 1 Rice Solo for "+liempo2+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*liempo2;
+            totalP = quantity*liempo2;
+            orderNames.add("Sizzling Liempo 1 Rice Solo");
+            orderPrice.add(liempo2);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+        }
+        }
+         
+        }else if(pick==7){  //                            GROUP MEALS
+        int groupM=0;
+        while(groupM<1||groupM>10){
+        try{
+         prt("*\n GROUP MEALS *");
+         prt("> [1] Chicken Inasal Paa Family Size = 490php");
+         prt("> [2] Chicken Inasal Paa Buddy Size = 246php");
+         prt("> [3] Chicken Inasal Pecho Family Size = 570php");
+         prt("> [4] Chicken Inasal Pecho Buddy Size = 296php ");
+         prt("> [5] Pork BBQ Family Size = 475php");
+         prt("> [6] Pork BBQ Buddy Size = 193php");
+         prt("> [7] Palabok Family Size = 305php");
+         prt("> [8] Pork Sisig Family Size = 297php");
+         prt("> [9] Bangus Sisig Family Size = 332php");
+         prt("> [10] Grilled Liempo Family Size = 503php");
+         prt("ENTER YOUR ORDER: ");
+         groupM=sc.nextInt();
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+         if(groupM==1){
+            while(true){
+            try{
+            prt("\n*You choose Chicken Inasal Paa Family Size for "+grpm1+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm1;
+            totalP = quantity*grpm1;
+            orderNames.add("Chicken Inasal Paa Family Size");
+            orderPrice.add(grpm1);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==2){
+            while(true){
+            try{
+            prt("\n*You choose Chicken Inasal Paa Buddy Size for "+grpm2+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm2;
+            totalP = quantity*grpm2;
+            orderNames.add("Chicken Inasal Paa Buddy Size");
+            orderPrice.add(grpm2);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==3){
+            while(true){
+            try{
+            prt("\n*You choose Chicken Inasal Pecho Family Size for "+grpm3+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm3;
+            totalP = quantity*grpm3;
+            orderNames.add("Chicken Inasal Pecho Family Size");
+            orderPrice.add(grpm3);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==4){
+            while(true){
+            try{
+            prt("\n*You choose Chicken Inasal Pecho Buddy Size for "+grpm4+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm4;
+            totalP = quantity*grpm4;
+            orderNames.add("Chicken Inasal Pecho Buddy Size");
+            orderPrice.add(grpm4);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==5){
+            while(true){
+            try{
+            prt("\n*You choose Pork BBQ Family Size for "+grpm5+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm5;
+            totalP = quantity*grpm5;
+            orderNames.add("Pork BBQ Family Size");
+            orderPrice.add(grpm5);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==6){
+            while(true){
+            try{
+            prt("\n*You choose Pork BBQ Buddy Size for "+grpm6+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm6;
+            totalP = quantity*grpm6;
+            orderNames.add("Pork BBQ Buddy Size");
+            orderPrice.add(grpm6);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==7){
+            while(true){
+            try{
+            prt("\n*You choose Palabok Family Size for "+grpm7+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm7;
+            totalP = quantity*grpm7;
+            orderNames.add("Palabok Family Size");
+            orderPrice.add(grpm7);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==8){
+            while(true){
+            try{
+            prt("\n*You choose Pork Sisig Family Size for "+grpm8+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm8;
+            totalP = quantity*grpm8;
+            orderNames.add("Pork Sisig Family Size");
+            orderPrice.add(grpm8);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==9){
+            while(true){
+            try{
+            prt("\n*You choose Bangus Sisig Family Size for "+grpm9+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm9;
+            totalP = quantity*grpm9;
+            orderNames.add("Bangus Sisig Family Size");
+            orderPrice.add(grpm9);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+
+         }else if (groupM==10){
+            while(true){
+            try{
+            prt("\n*You choose Grilled Liempo Family Size for "+grpm10+"Php");
+            prt("ENTER QUANTITY : ");
+            int quantity=sc.nextInt();
+            sc.nextLine();
+            total+=quantity*grpm10;
+            totalP = quantity*grpm10;
+            orderNames.add("Grilled Liempo Family Size");
+            orderPrice.add(grpm10);
+            orderQuantity.add(quantity);
+            totalPrice.add(totalP);
+            break;
+        }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+        }
+        }
+        }
+        }
+
+        }else if(pick==8){ //                            FIESTA GROUP MEALS
+            int FGM=0;
+            while(FGM<1||FGM>8){
+            try{
+            prt("\n* FIESTA GROUP MEALS *");
+            prt("> [1] Family Fiesta: Chicken Inasal & Pork BBQ = 749php");
+            prt("> [2] Family Fiesta: All Chicken Inasal = 829php");
+            prt("> [3] Family Fiesta: Pork BBQ & Grilled Liempo = 819php");
+            prt("> [4] Family Fiesta: Chicken Inasal and Grilled Liempo = 859php");
+            prt("> [5] Buddy Fiesta: Chicken Inasal & Pork BBQ = 399php");
+            prt("> [6] Buddy Fiesta: All Chicken Inasal = 429php");
+            prt("> [7] Buddy Fiesta: Pork BBQ & Grilled Liempo = 419php");
+            prt("> [8] Buddy Fiesta: Chicken Inasal & Grilled Liempo = 439php");
+            prt("ENTER YOUR ORDER: ");
+            FGM=sc.nextInt();
+            }catch(Exception e){
+                prt("\nINVALID INPUT! TRY AGAIN.");
+                sc.nextLine();
+            }
+
+            if (FGM==1){
+                while(true){
+                try{
+                prt("\n*You choose Family Fiesta: Chicken Inasal & Pork BBQ for "+FGM1+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM1;
+                totalP = quantity*FGM1;
+                orderNames.add("Family Fiesta: Chicken Inasal & Pork BBQ");
+                orderPrice.add(FGM1);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (FGM==2){
+                while(true){
+                try{
+                prt("\n*You choose Family Fiesta: All Chicken Inasal for "+FGM2+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM2;
+                totalP = quantity*FGM2;
+                orderNames.add("Family Fiesta: All Chicken Inasal");
+                orderPrice.add(FGM2);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (FGM==3){
+                while(true){
+                try{
+                prt("\n*You choose Family Fiesta: Pork BBQ & Grilled Liempo for "+FGM3+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM3;
+                totalP = quantity*FGM3;
+                orderNames.add("Family Fiesta: Pork BBQ & Grilled Liempo");
+                orderPrice.add(FGM3);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (FGM==4){
+                while(true){
+                try{
+                prt("\n*You choose Family Fiesta: Chicken Inasal and Grilled Liempo for "+FGM4+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM4;
+                totalP = quantity*FGM4;
+                orderNames.add("Family Fiesta: Chicken Inasal and Grilled Liempo");
+                orderPrice.add(FGM4);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (FGM==5){
+                while(true){
+                try{
+                prt("\n*You choose Buddy Fiesta: Chicken Inasal & Pork BBQ for "+FGM5+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM5;
+                totalP = quantity*FGM5;
+                orderNames.add("Buddy Fiesta: Chicken Inasal & Pork BBQ");
+                orderPrice.add(FGM5);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (FGM==6){
+                while(true){
+                try{
+                prt("\n*You choose Buddy Fiesta: All Chicken Inasal for "+FGM6+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM6;
+                totalP = quantity*FGM6;
+                orderNames.add("Buddy Fiesta: All Chicken Inasal");
+                orderPrice.add(FGM6);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (FGM==7){
+                while(true){
+                try{
+                prt("\n*You choose Buddy Fiesta: Pork BBQ & Grilled Liempo for "+FGM7+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM7;
+                totalP = quantity*FGM7;
+                orderNames.add("Buddy Fiesta: Pork BBQ & Grilled Liempo");
+                orderPrice.add(FGM7);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (FGM==8){
+                while(true){
+                try{
+                prt("\n*You choose Buddy Fiesta: Chicken Inasal & Grilled Liempo for "+FGM8+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*FGM8;
+                totalP = quantity*FGM8;
+                orderNames.add("Buddy Fiesta: Chicken Inasal & Grilled Liempo");
+                orderPrice.add(FGM8);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+            }
+            }
+
+        }else if (pick==9){ //                           PALABOK
+            int palabok=0;
+            while(palabok<1||palabok>2){
+            try{
+            prt("\n* PALABOK *");
+            prt("> [1] Palabok Regular = 79php");
+            prt("> [2] Palabok Party Size = 599php");
+            prt("ENTER YOUR ORDER: ");
+            palabok=sc.nextInt();
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            if (palabok==1){
+                while(true){
+                try{
+                prt("\n*You choose Palabok Regular for "+palabok1+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*palabok1;
+                totalP = quantity*palabok1;
+                orderNames.add("Palabok Regular");
+                orderPrice.add(palabok1);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if(palabok==2){
+                while(true){
+                try{
+                prt("\n*You choose Palabok Party Size for "+palabok2+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*palabok2;
+                totalP = quantity*palabok2;
+                orderNames.add("Palabok Party Size");
+                orderPrice.add(palabok2);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+            }
+            }
+
+        }else if (pick==10){ //                          LUMPIANG TOGUE
+            int LumTo=0;
+            while(LumTo<1||LumTo>3){
+            try{
+            prt("\n* LUMPIANG TOGUE *");
+            prt("> [1] 1pc Lumpiang Togue Add-on = "+LumTo1+"php");
+            prt("> [2] 1pc Lumpiang Togue Add-on = "+LumTo2+"php");
+            prt("> [3] 6pcs Lumpiang Togue Ala Carte = "+LumTo3+"php");
+            prt("ENTER YOUR ORDER: ");
+            LumTo=sc.nextInt();
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            if (LumTo==1){
+                while(true){
+                try{
+                prt("\n*You choose 1pc Lumpiang Togue Add-on for "+LumTo1+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*LumTo1;
+                totalP = quantity*LumTo1;
+                orderNames.add("1pc Lumpiang Togue Add-on");
+                orderPrice.add(LumTo1);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (LumTo==2){
+                while(true){
+                try{
+                prt("\n*You choose 2pcs Lumpiang Togue Ala Carte for "+LumTo2+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*LumTo2;
+                totalP = quantity*LumTo2;
+                orderNames.add("2pcs Lumpiang Togue Ala Carte");
+                orderPrice.add(LumTo2);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (LumTo==3){
+                while(true){
+                try{
+                prt("\n*You choose 6pcs Lumpiang Togue Ala Carte for "+LumTo3+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*LumTo3;
+                totalP = quantity*LumTo3;
+                orderNames.add("6pcs Lumpiang Togue Ala Carte");
+                orderPrice.add(LumTo3);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+            }
+            }
+
+        }else if (pick==11){ //                           DRINKS
+            int drinks=0;
+            while(drinks<1||drinks>5){
+            try{
+            prt("\n* DRINKS *");
+            prt("> [1] Soft Drink (Regular) = "+drinks1+"php");
+            prt("> [2] Soft Drink (Large) = "+drinks2+"php");
+            prt("> [3] Bottled Water = "+drinks3+"php");
+            prt("> [4] Iced Tea (Regular) = "+drinks4+"php");
+            prt("> [5] Iced Tea (Large) = "+drinks5+"php");
+            prt("ENTER YOUR ORDER: ");
+            drinks=sc.nextInt();
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+
+            if(drinks==1){
+                while(true){
+                try{
+                prt("\n*You choose Soft Drink (Regular) for "+drinks1+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*drinks1;
+                totalP = quantity*drinks1;
+                orderNames.add("Soft Drink (Regular)");
+                orderPrice.add(drinks1);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (drinks==2){
+                while(true){
+                try{
+                prt("\n*You choose Soft Drink (Large) for "+drinks2+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*drinks2;
+                totalP = quantity*drinks2;
+                orderNames.add("Soft Drink (Large)");
+                orderPrice.add(drinks2);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (drinks==3){
+                while(true){
+                try{
+                prt("\n*You choose Bottled Water for "+drinks3+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*drinks3;
+                totalP = quantity*drinks3;
+                orderNames.add("Bottled Water");
+                orderPrice.add(drinks3);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (drinks==4){
+                while(true){
+                try{
+                prt("\n*You choose Iced Tea (Regular) for "+drinks4+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*drinks4;
+                totalP = quantity*drinks4;
+                orderNames.add("Iced Tea (Regular)");
+                orderPrice.add(drinks4);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+
+            }else if (drinks==5){
+                while(true){
+                try{
+                prt("\n*You choose Iced Tea (Large) for "+drinks5+"Php");
+                prt("ENTER QUANTITY : ");
+                int quantity=sc.nextInt();
+                sc.nextLine();
+                total+=quantity*drinks5;
+                totalP = quantity*drinks5;
+                orderNames.add("Iced Tea (Large)");
+                orderPrice.add(drinks5);
+                orderQuantity.add(quantity);
+                totalPrice.add(totalP);
+                break;
+            }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+            }
+            }
+            }
+            }
+            }
+            }
+}
+
+public void choiceOption(){ // AFTER SELECTING ORDER IT WILL DIRECT TO THIS SECTION: CHOOSING OPTIONS
+    String pick2=""; //    =====>    Declaration variable for 'pick2' with no value or empty.
+    while (true||pick2.isBlank()){ //  =====> Using while to LOOP the options incase of INVALID/INCORRECT INPUT.
+    prt("\nPress 'Y' to order more");
+    prt("Press 'N' for no more order");
+    prt("press 'D' to discard your order");
+    prt("ENTER YOUR CHOICE : ");
+    pick2=sc.nextLine();
+   
+    //IF CONDITION: 
+   if(pick2.toUpperCase().equals("Y")){ // ===> IF the user type 'Y' to order more this will display: 
+ prt("\n****************************************");
+ prt("**      Please select the category    **");
+ prt("**        [1] REGULAR                 **");
+ prt("**        [2] SOLO FIESTA             **");
+ prt("**        [3] PORK BBQ                **");
+ prt("**        [4] HALO-HALO               **");
+ prt("**        [5] SISIG                   **");
+ prt("**        [6] LIEMPO                  **");
+ prt("**        [7] GROUP MEALS             **");
+ prt("**        [8] FIESTA GROUP MEALs      **");
+ prt("**        [9] PALABOK                 **");
+ prt("**        [10] LUMPIANG TOGUE         **");
+ prt("**        [11] DRINKS                 **");
+ prt("****************************************");
+    // After selecting into these category it will repeat to the same cycle:
+    SelectOrder();  // The public void 'SelectOrder' which is where you select your order.
+    choiceOption(); // The public void 'choiceOption' Which is where you choose options between to order more, finalize, or to discard.
+    FoodBill();     // The public void 'FoodBill' which is where you see the list of your orders, to pay, and receive your receipts.
+
+   }else if(pick2.toUpperCase().equals("N")){ // ====> IF the user type 'N' for no more order.
+    FoodBill(); // it will direct to foodbill
+
+   } else if(pick2.toUpperCase().equals("D")){ // ====> IF the user type 'D' to discard the order.
+    String yes = ""; //  ====>   Declaration variable for 'pick2' with no value or empty.
+    
+    while(true||yes.isBlank()){ // ===>  Using while to LOOP the options incase of INVALID/INCORRECT INPUT.
+        prt("\nARE YOU SURE? (Y/N): ");
+        yes = sc.nextLine();
+         
+        if(yes.toUpperCase().equals("Y")){ // IF the user type 'y' it will completely discard the order or exit the terminal without ordering.
+            discardOrder(); // it will direct to public void 'discardOrder' 
+         }else if(yes.toUpperCase().equals("N")){ // IF the user type 'n' it will go back to choosing options between to order more, finalize, or to discard.
+           choiceOption(); //  it will direct to public void 'choiceOption'
+         }else{ // IF the user type incorrectly between choosing 'yes' or 'no' to discard the order, this will display and repeat the question again.
+            prt("\nINVALID INPUT! PLEASE TRY AGAIN.");
+         }
+       }
+   }else{ // IF the user type invalid input this will show and repeat the question again to choose which options.
+    prt("\nINVALID INPUT! TRY AGAIN.");
+   }
+}
+}
+
+    public void FoodBill(){ /*  AFTER THE CHOOSING OPTIONS, IT WILL DIRECT TO THIS SECTION IF THE USER CHOOSE TO NOT ORDER ANYMORE:
+                            FOOD BILLING SECTION */
+    String ans = ""; //   ====>     Declaration variable for 'ans' short for 'answer' / Used in scanner applying discount as well as for the loop which is the 'ans.isBlank()'
+    float cash = 0.00f; //  ====>   Declaration variable for 'cash'
+
+
+    //VAT Application and Calculation:
+    calculateVAT = VAT*total;  //     ====>            For example: VAT -> 12% = 0.12 and the total is = 69.00 -> 0.12 x 69.00 = 8.28 (VAT amount)
+    calculateVAT2 = total-calculateVAT; //  ===>       69.00 - 8.28 = 60.72 (VATable sales)
+    totalplusVAT = calculateVAT2+calculateVAT; // ===> 60.72 + 8.28 = 69.00
+    // the purpose of this is to get the VATable sales and the VAT amount.
+
+    prt("\nORDERED: \n");   //     Display of the order/s :
+    for(int i=0; i<orderNames.size(); i++){  // In this FOR LOOP this is where all the list of the order(s) from arraylist will be printed here:
+        prt("> "+orderNames.get(i)+" | PRICE: "+orderPrice.get(i)+" | QUANTITY: "+orderQuantity.get(i)+" | TOTAL: "+totalPrice.get(i));
+    }
+    prt("TOTAL PAYMENT: "+(String.format("%.2f",totalplusVAT))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+
+    while(true||ans.isBlank()){//  ====> LOOPING FOR DISCOUNT SELECTION. / 'ans.isBlank()' is used when the user typed nothing and just enter then the question will loop again.
+    prt("\nAPPLY DISCOUNT?");
+    prt("TYPE 'PWD'    | FOR PWD - 15%OFF");
+    prt("TYPE 'SENIOR' | FOR SENIOR - 20%OFF ");
+    prt("TYPE 'NO'     | FOR NO DISCOUNT");
+    prt("ENTER: ");
+    ans=sc.nextLine();
+    if(ans.toUpperCase().equals("PWD")){ // FOR PWD DISCOUNT
+
+    float discountwithVAT = totalplusVAT*discountPWD; // ===> For example: The price is -> 69.00(with VAT already) and Discount for PWD -> 15% = 0.15, 69.00 x 0.15 = 3.45 (discount amount)
+    float discounted = totalplusVAT-discountwithVAT; //  ===> 69.00 - 3.45 = 65.55 (here's the discounted price)
+
+    boolean loops = true;
+    while(loops){ //          ======>            To loop for invalid input.
+    try{   //                 ======>            To try and catch exception.
+    prt("\nDISCOUNT FOR PWD APPLIED: "+(String.format("%.2f",discounted))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("ENTER YOUR CASH: ");
+    cash=sc.nextFloat();
+    break; //               ======>    THIS BREAK PURPOSE IS TO PREVENT UNNECESSESARY LOOPING. 
+    }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+    }
+    }
+    float bill = cash-discounted; // ===> For example: the user entered the cash of -> 100 and the discounted order is -> 65.55, 100 - 65.55 = 34.45 (exchange)
+    prt("\nYOUR EXCHANGE: "+(String.format("%.2f", bill)+"Php\n"));
+    prt("\nRECEIPT:\n");
+    prt("======================================================");
+    prt("||                 MANG INASAL                      ||");
+    prt("||             STI Angeles Branch                   ||");
+    prt("||--------------------------------------------------||");
+    prt("||Qty Description                    Price          ||");
+    prt("||--------------------------------------------------||");
+    for(int i=0; i<orderNames.size(); i++){ //TO DISPLAY THE LISTS OF NAME OF THE ORDER, QUANTITY, AND PRICE
+        prt(orderQuantity.get(i)+"x "+orderNames.get(i)+"  "+totalPrice.get(i)+"Php");
+        totalItems += orderQuantity.get(i); // TO DISPLAY THE NUMBER OF ITEMS
+    }
+    prt("\n"+totalItems+" ITEMS(s)");
+    prt("o----------------------------------------------------o");
+    prt("TOTAL DUE:                           "+ (String.format("%.2f", discounted))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("CASH:                                "+cash);
+    prt("CHANGE DUE:                          "+(String.format("%.2f", bill))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("o----------------------------------------------------o");
+    prt("\nVATable Sales:                       "+(String.format("%.2f",calculateVAT2))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("VAT-Exempt Sales:                    0.0");
+    prt("VAT Zero-Rated Sales:                0.0");
+    prt("VAT Amount:                          "+(String.format("%.2f",calculateVAT))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("o====================================================o");
+    prt("\n*************THANK YOU FOR ORDERING!************\n ");
+    System.exit(0);
+
+    }else if(ans.toUpperCase().equals("SENIOR")){ // FOR SENIOR DISCOUNT
+        float discountwithVAT = totalplusVAT*discountSenior; // ===> For example: The price is -> 69.00(with VAT already) and Discount for Senior -> 20% = 0.20, 69.00 x 0.20 = 13.8 (discount amount)
+        float discounted = totalplusVAT-discountwithVAT; //     ===> 69.00 - 13.8 = 55.2 (here's the discounted price)
+
+
+        boolean loops = true;
+        while(loops){
+        try{
+        prt("\nDISCOUNT FOR SENIOR APPLIED: "+(String.format("%.2f", discounted))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+        prt("ENTER YOUR CASH: ");
+        cash=sc.nextFloat();
+        break;
+        }catch(Exception e){
+            prt("\nINVALID INPUT! TRY AGAIN.");
+            sc.nextLine();
+        }
+        }
+
+        float bill = cash-discounted; // ===> For example: the user entered the cash of -> 100 and the discounted order is -> 55.2, 100 - 55.2 = 48.8 (exchange)
+        prt("\nYOUR EXCHANGE: "+(String.format("%.2f", bill)+"Php\n"));
+        prt("\nRECEIPT:\n");
+        prt("======================================================");
+        prt("||                 MANG INASAL                      ||");
+        prt("||             STI Angeles Branch                   ||");
+        prt("||--------------------------------------------------||");
+        prt("||Qty Description                    Price          ||");
+        prt("||--------------------------------------------------||");
+        
+        for(int i=0; i<orderNames.size(); i++){ //TO DISPLAY THE LISTS OF NAME OF THE ORDER, QUANTITY, AND PRICE
+            prt(orderQuantity.get(i)+"x "+orderNames.get(i)+"  "+totalPrice.get(i)+"Php");
+            totalItems += orderQuantity.get(i);
+        }
+        prt("\n"+totalItems+" ITEMS(s)");
+        prt("o----------------------------------------------------o");
+        prt("TOTAL DUE:                           "+(String.format("%.2f", discounted))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+        prt("CASH:                                "+cash);
+        prt("CHANGE DUE:                          "+(String.format("%.2f", bill))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+        prt("o----------------------------------------------------o");
+        prt("\nVATable Sales:                       "+(String.format("%.2f",calculateVAT2))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+        prt("VAT-Exempt Sales:                    0.0");
+        prt("VAT Zero-Rated Sales:                0.0");
+        prt("VAT Amount:                          "+(String.format("%.2f",calculateVAT))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+        prt("o====================================================o");
+        prt("\n*************THANK YOU FOR ORDERING!************\n ");
+        System.exit(0); // TO FORCEFULLY EXIT THE TERMINAL WITHOUT LOOPING TWICE.
+
+    } else if (ans.toUpperCase().equals("NO")||ans.toUpperCase().equals("NAH")){ //  FOR NO DISCOUNT.
+    prt("");
+    for(int i=0; i<orderNames.size(); i++){
+        prt("> "+orderNames.get(i)+ " | PRICE: "+orderPrice.get(i)+""+" | QUANTITY: "+orderQuantity.get(i)+" | TOTAL: "+totalPrice.get(i));
+    }
+    //prt("YOUR TOTAL BILL: "+(String.format("%.2f",total))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    boolean loops = true;
+    while(loops){
+    try{
+    prt("YOUR TOTAL BILL: "+(String.format("%.2f",totalplusVAT)));
+    prt("\nENTER YOUR CASH: ");
+    cash=sc.nextFloat();
+    break;
+    }catch(Exception e){
+        prt("\nINVALID INPUT! TRY AGAIN.");
+        sc.nextLine();
+    }
+    }
+    float bill = cash-totalplusVAT; // ===> For example: the user entered the cash of -> 100 and the order (no discount applied) is -> 69.00, 100 - 69.00 = 31.00 (exchange)
+    prt("\nYOUR EXCHANGE: "+(String.format("%.2f", bill)+"Php\n")); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("\nRECEIPT:\n");
+    prt("======================================================");
+    prt("||                 MANG INASAL                      ||");
+    prt("||             STI Angeles Branch                   ||");
+    prt("||--------------------------------------------------||");
+    prt("||Qty Description                    Price          ||");
+    prt("||--------------------------------------------------||");
+
+    for(int i=0; i<orderNames.size(); i++){ //TO DISPLAY THE LISTS OF NAME OF THE ORDER, QUANTITY, AND PRICE
+        prt(orderQuantity.get(i)+"x "+orderNames.get(i)+"  "+totalPrice.get(i));
+        totalItems += orderQuantity.get(i);
+    }
+    prt("\n"+totalItems+" ITEM(s)");
+    prt("o----------------------------------------------------o");
+    prt("TOTAL DUE:                           "+(String.format("%.2f", totalplusVAT))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("CASH:                                "+cash);
+    prt("CHANGE DUE:                          "+(String.format("%.2f",bill))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("o----------------------------------------------------o");
+    prt("\nVATable Sales:                       "+(String.format("%.2f",calculateVAT2))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("VAT-Exempt Sales:                   0.00");
+    prt("VAT Zero-Rated Sales:               0.00");
+    prt("VAT Amount:                          "+(String.format("%.2f",calculateVAT))); // String format purpose is to make the digits of decimal into specified digits. For example, instead of '2.6969' it will turn to '2.69'
+    prt("||====================================================||");
+    prt("\n*************THANK YOU FOR ORDERING!************\n ");
+    System.exit(0); // TO FORCEFULLY EXIT THE TERMINAL WITHOUT LOOPING TWICE.
+    }else{
+        prt("\nINVALID INPUT! PLEASE TRY AGAIN.");
+    }
+}
+}
+  
+    public void discardOrder(){
+        prt("\nORDER DISCARDED. \n ");
+      System.exit(0); // TO FORCEFULLY EXIT THE TERMINAL WITHOUT LOOPING TWICE.
+    }
+
+
+
+
+
+//customized system.out.println
+static void prt(String txt){
+    System.out.println(txt);
+}
+}
